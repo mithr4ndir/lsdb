@@ -9,3 +9,7 @@ from .loaders.dataframe.from_astropy import from_astropy
 from .loaders.dataframe.from_dataframe import from_dataframe
 from .loaders.hats.read_hats import open_catalog, read_hats
 from .nested.datasets import generate_catalog, generate_data
+
+import dask
+
+dask.config.set({"dataframe.convert-string": False})
