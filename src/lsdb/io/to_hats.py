@@ -60,7 +60,10 @@ def perform_write(
         at the specified order.
     """
     if len(df) == 0:
-        return pd.DataFrame({"count": [0], "histogram": [SparseHistogram([], [], histogram_order)]})
+        histogram = SparseHistogram([], [], histogram_order)
+        write_histogram(histogram, base_catalog_dir, hp_pixel)
+        write_done_pixel(base_catalog_dir, hp_pixel)
+        return pd.DataFrame({"count": [0], "histogram": [histogram]})
     pixel_dir = hc.io.pixel_directory(base_catalog_dir, hp_pixel.order, hp_pixel.pixel)
     hc.io.file_io.make_directory(pixel_dir, exist_ok=True)
     pixel_path = hc.io.paths.pixel_catalog_file(base_catalog_dir, hp_pixel)
